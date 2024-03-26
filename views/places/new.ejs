@@ -1,0 +1,30 @@
+<%- layout('layouts/boilerplate') %>
+<h1>Turistik Yer Ekle</h1>
+<form action="/places" method="POST">
+  <div>
+    <label for="title">Başlık</label>
+    <input type="text" id="title" name="place[title]" required />
+  </div>
+  <div>
+    <label for="image">Resim</label>
+    <input type="text" id="image" name="place[image]" required />
+  </div>
+  <div>
+    <label for="description">Tanım</label>
+    <textarea
+      type="text"
+      id="description"
+      name="place[description]"
+      required
+    ></textarea>
+  </div>
+  <div>
+    <label for="location">Konum</label>
+    <input type="text" id="location" name="place[location]" required />
+  </div>
+  <div>
+    <label for="price">Fiyat</label>
+    <input type="text" id="price" name="place[price]" required />
+  </div>
+  <button>Ekle</button>
+</form>

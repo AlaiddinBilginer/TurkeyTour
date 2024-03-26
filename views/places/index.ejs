@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate') %>
+<h1>Tüm Turistik Yerler</h1>
+<a href="/places/new">Turistik Yer Ekle</a>
+<% for(let place of places) { %>
+<h2><%= place.title %>, <%= place.location %></h2>
+<img src="<%= place.image %>" alt="Place" />
+<p><%= place.description %></p>
+<h3><%= place.price %> TL</h3>
+<a href="/places/<%= place.id %>">Detayları Görüntüle</a>
+<% } %>
