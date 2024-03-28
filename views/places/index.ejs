@@ -1,10 +1,21 @@
 <% layout('layouts/boilerplate') %>
-<h1>Tüm Turistik Yerler</h1>
-<a href="/places/new">Turistik Yer Ekle</a>
+<h1 class="mb-3">Tüm Turistik Yerler</h1>
 <% for(let place of places) { %>
-<h2><%= place.title %>, <%= place.location %></h2>
-<img src="<%= place.image %>" alt="Place" />
-<p><%= place.description %></p>
-<h3><%= place.price %> TL</h3>
-<a href="/places/<%= place.id %>">Detayları Görüntüle</a>
+<div class="card mb-3">
+  <div class="row">
+    <div class="col-md-4">
+      <img class="img-fluid" src="<%= place.image %>" alt="Place" />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2><%= place.title %>, <%= place.location %></h2>
+        <p><%= place.description %></p>
+        <h3><%= place.price %> TL</h3>
+        <a class="btn btn-primary mt-3" href="/places/<%= place.id %>"
+          >Detayları Görüntüle</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
 <% } %>

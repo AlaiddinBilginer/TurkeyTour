@@ -1,6 +1,28 @@
 <%- layout('layouts/boilerplate') %>
-<h1><%= place.title %></h1>
-<h2><%= place.location %></h2>
-<img src="<%= place.image %>" alt="Place" />
-<p><%= place.description %></p>
-<h3><%= place.price %></h3>
+<div class="row mb-5">
+  <div class="col-6 offset-3">
+    <div class="card">
+      <img class="card-image-top" src="<%= place.image %>" alt="Place" />
+      <div class="card-body">
+        <h1 class="card-title"><%= place.title %></h1>
+        <p class="card-text"><%= place.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-muted"><%= place.location %></li>
+        <li class="list-group-item"><%= place.price %></li>
+      </ul>
+      <div class="card-body">
+        <a href="/places/<%= place._id %>/edit" class="btn btn-info text-light"
+          >Düzenle</a
+        >
+        <form
+          class="d-inline"
+          method="POST"
+          action="/places/<%= place._id %>?_method=DELETE"
+        >
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

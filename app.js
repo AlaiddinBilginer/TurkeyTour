@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const ejsMate = require('ejs-mate');
+const methodOverride = require('method-override');
 const Place = require('./models/place');
 
 mongoose
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
   res.render('home');
@@ -28,6 +30,24 @@ app.get('/places/new', (req, res) => {
 app.get('/places', async (req, res) => {
   const places = await Place.find({});
   res.render('places/index', { places });
+});
+
+app.delete('/places/:id', async (req, res) => {
+  const { id } = req.params;
+  await Place.findByIdAndDelete(id);
+  res.redirect('/places');
+});
+
+app.get('/places/:id/edit', async (req, res) => {
+  const { id } = req.params;
+  const place = await Place.findById(id);
+  res.render('places/edit', { place });
+});
+
+app.put('/places/:id', async (req, res) => {
+  const { id } = req.params;
+  const place = await Place.findByIdAndUpdate(id, { ...req.body.place });
+  res.redirect(`/places/${id}`);
 });
 
 app.get('/places/:id', async (req, res) => {

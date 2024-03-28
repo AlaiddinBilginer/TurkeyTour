@@ -1,15 +1,21 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row mb-5">
-  <div class="col-8 offset-2">
-    <h1 class="mb-3">Turistik Yer Ekle</h1>
-    <form action="/places" method="POST" novalidate class="validated-form">
+  <div class="col-md-8 offset-2">
+    <h1 class="mb-3">Düzenle</h1>
+    <form
+      action="/places/<%= place._id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Başlık</label>
         <input
           type="text"
-          class="form-control"
           id="title"
           name="place[title]"
+          value="<%= place.title %>"
+          class="form-control"
           required
         />
       </div>
@@ -17,9 +23,10 @@
         <label for="image" class="form-label">Resim</label>
         <input
           type="text"
-          class="form-control"
           id="image"
           name="place[image]"
+          value="<%= place.image %>"
+          class="form-control"
           required
         />
       </div>
@@ -27,19 +34,23 @@
         <label for="description" class="form-label">Tanım</label>
         <textarea
           type="text"
+          class="form-control"
           id="description"
           name="place[description]"
-          class="form-control"
+          rows="5"
           required
-        ></textarea>
+        >
+<%= place.description %></textarea
+        >
       </div>
       <div class="mb-3">
         <label for="location" class="form-label">Konum</label>
         <input
           type="text"
-          class="form-control"
           id="location"
           name="place[location]"
+          value="<%= place.location %>"
+          class="form-control"
           required
         />
       </div>
@@ -47,13 +58,14 @@
         <label for="price" class="form-label">Fiyat</label>
         <input
           type="text"
-          class="form-control"
           id="price"
           name="place[price]"
+          value="<%= place.price %>"
+          class="form-control"
           required
         />
       </div>
-      <button class="btn btn-success">Ekle</button>
+      <button class="btn btn-primary">Düzenle</button>
     </form>
   </div>
 </div>
