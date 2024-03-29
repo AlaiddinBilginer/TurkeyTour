@@ -45,13 +45,18 @@
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">Fiyat</label>
-        <input
-          type="text"
-          class="form-control"
-          id="price"
-          name="place[price]"
-          required
-        />
+        <div class="input-group">
+          <span class="input-group-text" id="price-addon">₺</span>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            name="place[price]"
+            placeholder="0.00"
+            aria-describedby="price-addon"
+            required
+          />
+        </div>
       </div>
       <button class="btn btn-success">Ekle</button>
     </form>
