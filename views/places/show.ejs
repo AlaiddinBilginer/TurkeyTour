@@ -1,10 +1,12 @@
 <%- layout('layouts/boilerplate') %>
 <div class="row mb-5">
-  <div class="col-6 offset-3">
-    <div class="card">
+  <div class="col-8 offset-2">
+    <div class="card mb-5">
+      <div class="card-body">
+        <h1 class="card-title text-center"><%= place.title %></h1>
+      </div>
       <img class="card-image-top" src="<%= place.image %>" alt="Place" />
       <div class="card-body">
-        <h1 class="card-title"><%= place.title %></h1>
         <p class="card-text"><%= place.description %></p>
       </div>
       <ul class="list-group list-group-flush">
@@ -24,5 +26,50 @@
         </form>
       </div>
     </div>
+    <h2 class="mb-3">Yorum Ekle</h2>
+    <form
+      action="/places/<%= place._id %>/reviews"
+      method="POST"
+      novalidate
+      class="validated-form mb-3"
+    >
+      <div class="mb-3">
+        <label for="rating" class="form-label">Puan</label>
+        <input
+          name="review[rating]"
+          type="range"
+          min="1"
+          max="5"
+          class="form-range"
+          id="rating"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="review" class="form-label">Yorum</label>
+        <textarea
+          name="review[body]"
+          id="review"
+          class="form-control"
+          cols="30"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+      <button class="btn btn-success">Submit</button>
+    </form>
+    <% for(let review of place.reviews) { %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Puan: <%= review.rating %></h5>
+        <p class="card-text">Yorum: <%= review.body %></p>
+        <form
+          action="/places/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-sm btn-danger">Yorumu Sil</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
   </div>
 </div>

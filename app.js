@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const path = require('path');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
-const { placeSchema } = require('./schemas');
+const { placeSchema, reviewSchema } = require('./schemas');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
+
 const Place = require('./models/place');
+const Review = require('./models/review');
 
 mongoose
   .connect('mongodb://127.0.0.1:27017/TurkeyTour')
@@ -24,6 +26,16 @@ app.use(methodOverride('_method'));
 
 const validatePlace = (req, res, next) => {
   const { error } = placeSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(',');
+    throw new ExpressError(400, msg);
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(',');
     throw new ExpressError(400, msg);
@@ -80,7 +92,7 @@ app.get(
   '/places/:id',
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const place = await Place.findById(id);
+    const place = await Place.findById(id).populate('reviews');
     res.render('places/show', { place });
   })
 );
@@ -92,6 +104,29 @@ app.post(
     const place = new Place(req.body.place);
     await place.save();
     res.redirect(`/places/${place._id}`);
+  })
+);
+
+app.post(
+  '/places/:id/reviews',
+  validateReview,
+  catchAsync(async (req, res) => {
+    const place = await Place.findById(req.params.id);
+    const review = new Review(req.body.review);
+    place.reviews.push(review);
+    await review.save();
+    await place.save();
+    res.redirect(`/places/${place._id}`);
+  })
+);
+
+app.delete(
+  '/places/:id/reviews/:reviewId',
+  catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Place.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/places/${id}`);
   })
 );
 
