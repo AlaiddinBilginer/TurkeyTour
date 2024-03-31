@@ -26,6 +26,7 @@ router.post(
     place.reviews.push(review);
     await review.save();
     await place.save();
+    req.flash('success', 'Yorumunuz başarı ile eklendi!');
     res.redirect(`/places/${place._id}`);
   })
 );
@@ -36,6 +37,7 @@ router.delete(
     const { id, reviewId } = req.params;
     await Place.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
+    req.flash('success', 'Yorumunuz başarı ile silindi!');
     res.redirect(`/places/${id}`);
   })
 );

@@ -33,6 +33,7 @@ router.delete(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
+    req.flash('success', 'Turistik yer başarı ile silindi!');
     res.redirect('/places');
   })
 );
@@ -42,6 +43,10 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
+    if (!place) {
+      req.flash('error', 'Böyle bir turistik alan bulunamadı!');
+      return res.redirect('/places');
+    }
     res.render('places/edit', { place });
   })
 );
@@ -52,6 +57,7 @@ router.put(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const place = await Place.findByIdAndUpdate(id, { ...req.body.place });
+    req.flash('success', 'Turistik yer başarı ile güncellendi!');
     res.redirect(`/places/${id}`);
   })
 );
@@ -61,6 +67,10 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id).populate('reviews');
+    if (!place) {
+      req.flash('error', 'Böyle bir turistik alan bulunamadı!');
+      return res.redirect('/places');
+    }
     res.render('places/show', { place });
   })
 );
@@ -71,6 +81,7 @@ router.post(
   catchAsync(async (req, res, next) => {
     const place = new Place(req.body.place);
     await place.save();
+    req.flash('success', 'Turistik yer başarı ile eklendi!');
     res.redirect(`/places/${place._id}`);
   })
 );
