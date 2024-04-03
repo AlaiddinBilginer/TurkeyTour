@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Place = require('../models/place');
 const { placeSchema } = require('../schemas');
-
+const { isLoggedIn } = require('../middleware');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 
@@ -16,7 +16,7 @@ const validatePlace = (req, res, next) => {
   }
 };
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('places/new');
 });
 
@@ -30,6 +30,7 @@ router.get(
 
 router.delete(
   '/:id',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
@@ -40,6 +41,7 @@ router.delete(
 
 router.get(
   '/:id/edit',
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
@@ -53,6 +55,7 @@ router.get(
 
 router.put(
   '/:id',
+  isLoggedIn,
   validatePlace,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -77,6 +80,7 @@ router.get(
 
 router.post(
   '/',
+  isLoggedIn,
   validatePlace,
   catchAsync(async (req, res, next) => {
     const place = new Place(req.body.place);
