@@ -8,6 +8,7 @@ mongoose
 
 Place.insertMany([
   {
+    author: '660beaee0057154c17604d52',
     title: 'Aspendos Antik Tiyatrosu',
     image:
       'https://cdn2.enuygun.com/media/lib/825x620/uploads/image/aspendos-33995.webp',
@@ -17,6 +18,7 @@ Place.insertMany([
     price: 340,
   },
   {
+    author: '660beaee0057154c17604d52',
     title: 'Düden Şelalesi',
     image:
       'https://cdn2.enuygun.com/media/lib/825x620/uploads/image/duden-selalesi-9540.webp',
@@ -26,6 +28,7 @@ Place.insertMany([
     price: 15,
   },
   {
+    author: '660beaee0057154c17604d52',
     title: 'Salda Gölü',
     image:
       'https://cdn2.enuygun.com/media/lib/825x620/uploads/image/salda-golu-33998.webp',
@@ -35,6 +38,7 @@ Place.insertMany([
     price: 0,
   },
   {
+    author: '660beaee0057154c17604d52',
     title: 'Antakya Arkeoloji Müzesi',
     image:
       'https://cdn2.enuygun.com/media/lib/825x620/uploads/image/hatay-arkeoloji-muzesi-37741.webp',
@@ -44,6 +48,7 @@ Place.insertMany([
     price: 260,
   },
   {
+    author: '660beaee0057154c17604d52',
     title: 'Taşköprü',
     image:
       'https://cdn2.enuygun.com/media/lib/825x620/uploads/image/adana-taskopru-37740.webp',

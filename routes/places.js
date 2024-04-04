@@ -1,20 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Place = require('../models/place');
-const { placeSchema } = require('../schemas');
-const { isLoggedIn } = require('../middleware');
+const { isLoggedIn, validatePlace, isAuthor } = require('../middleware');
 const catchAsync = require('../utils/catchAsync');
-const ExpressError = require('../utils/ExpressError');
-
-const validatePlace = (req, res, next) => {
-  const { error } = placeSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(',');
-    throw new ExpressError(400, msg);
-  } else {
-    next();
-  }
-};
 
 router.get('/new', isLoggedIn, (req, res) => {
   res.render('places/new');
@@ -31,6 +19,7 @@ router.get(
 router.delete(
   '/:id',
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Place.findByIdAndDelete(id);
@@ -42,6 +31,7 @@ router.delete(
 router.get(
   '/:id/edit',
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const place = await Place.findById(id);
@@ -57,9 +47,10 @@ router.put(
   '/:id',
   isLoggedIn,
   validatePlace,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const place = await Place.findByIdAndUpdate(id, { ...req.body.place });
+    await Place.findByIdAndUpdate(id, { ...req.body.place });
     req.flash('success', 'Turistik yer başarı ile güncellendi!');
     res.redirect(`/places/${id}`);
   })
@@ -69,7 +60,10 @@ router.get(
   '/:id',
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const place = await Place.findById(id).populate('reviews');
+    const place = await Place.findById(id)
+      .populate({ path: 'reviews', populate: { path: 'author' } })
+      .populate('author');
+    console.log(place);
     if (!place) {
       req.flash('error', 'Böyle bir turistik alan bulunamadı!');
       return res.redirect('/places');
@@ -84,6 +78,7 @@ router.post(
   validatePlace,
   catchAsync(async (req, res, next) => {
     const place = new Place(req.body.place);
+    place.author = req.user._id;
     await place.save();
     req.flash('success', 'Turistik yer başarı ile eklendi!');
     res.redirect(`/places/${place._id}`);

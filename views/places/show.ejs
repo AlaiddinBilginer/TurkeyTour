@@ -11,8 +11,12 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item text-muted"><%= place.location %></li>
+        <li class="list-group-item text-muted">
+          Oluşturan: <%= place.author.username %>
+        </li>
         <li class="list-group-item"><%= place.price %></li>
       </ul>
+      <% if(currentUser && place.author.equals(currentUser._id)) { %>
       <div class="card-body">
         <a href="/places/<%= place._id %>/edit" class="btn btn-info text-light"
           >Düzenle</a
@@ -25,7 +29,9 @@
           <button class="btn btn-danger">Delete</button>
         </form>
       </div>
+      <% } %>
     </div>
+    <% if(currentUser) { %>
     <h2 class="mb-3">Yorum Ekle</h2>
     <form
       action="/places/<%= place._id %>/reviews"
@@ -57,17 +63,22 @@
       </div>
       <button class="btn btn-success">Submit</button>
     </form>
-    <% for(let review of place.reviews) { %>
+    <% } %> <% for(let review of place.reviews) { %>
     <div class="card mb-3">
       <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">
+          <%= review.author.username %>
+        </h6>
         <h5 class="card-title">Puan: <%= review.rating %></h5>
         <p class="card-text">Yorum: <%= review.body %></p>
+        <% if(currentUser && review.author.equals(currentUser._id)) {%>
         <form
           action="/places/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE"
           method="POST"
         >
           <button class="btn btn-sm btn-danger">Yorumu Sil</button>
         </form>
+        <% } %>
       </div>
     </div>
     <% } %>
