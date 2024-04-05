@@ -12,7 +12,7 @@ module.exports.placeSchema = Joi.object({
 
 module.exports.reviewSchema = Joi.object({
   review: Joi.object({
-    rating: Joi.number().max(5).min(1).required(),
+    rating: Joi.number().max(5).min(0).required(),
     body: Joi.string().required(),
   }).required(),
 });
