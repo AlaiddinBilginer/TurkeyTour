@@ -5,16 +5,14 @@
   <div class="card mb-3">
     <div class="row">
       <div class="col-md-4">
-        <img class="img-fluid" src="<%= place.image %>" alt="Place" />
+        <img class="img-fluid" src="<%= place.images[0].url %>" alt="Place" />
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <h2><%= place.title %>, <%= place.location %></h2>
           <p><%= place.description %></p>
           <h3><%= place.price %> TL</h3>
-          <a class="btn btn-primary mt-3" href="/places/<%= place.id %>"
-            >Detayları Görüntüle</a
-          >
+          <a class="btn btn-primary mt-3" href="/places/<%= place.id %>">Detayları Görüntüle</a>
         </div>
       </div>
     </div>

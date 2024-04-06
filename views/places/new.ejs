@@ -2,26 +2,16 @@
 <div class="row mb-5">
   <div class="col-8 offset-2">
     <h1 class="mb-3">Turistik Yer Ekle</h1>
-    <form action="/places" method="POST" novalidate class="validated-form">
+    <form
+      action="/places"
+      method="POST"
+      novalidate
+      class="validated-form"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Başlık</label>
-        <input
-          type="text"
-          class="form-control"
-          id="title"
-          name="place[title]"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="image" class="form-label">Resim</label>
-        <input
-          type="text"
-          class="form-control"
-          id="image"
-          name="place[image]"
-          required
-        />
+        <input type="text" class="form-control" id="title" name="place[title]" required />
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Tanım</label>
@@ -35,13 +25,7 @@
       </div>
       <div class="mb-3">
         <label for="location" class="form-label">Konum</label>
-        <input
-          type="text"
-          class="form-control"
-          id="location"
-          name="place[location]"
-          required
-        />
+        <input type="text" class="form-control" id="location" name="place[location]" required />
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">Fiyat</label>
@@ -57,6 +41,10 @@
             required
           />
         </div>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Resim</label>
+        <input class="form-control" type="file" id="image" name="image" multiple />
       </div>
       <button class="btn btn-success">Ekle</button>
     </form>
