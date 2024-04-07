@@ -5,7 +5,15 @@
   <div class="card mb-3">
     <div class="row">
       <div class="col-md-4">
+        <% if(place.images.length) { %>
         <img class="img-fluid" src="<%= place.images[0].url %>" alt="Place" />
+        <% } else { %>
+        <img
+          class="img-fluid"
+          src="https://res.cloudinary.com/dnhdprmgf/image/upload/v1712487822/Resim_Bulunamad%C4%B1_tku1ba.png"
+          alt="Resim Bulunamadı"
+        />
+        <% } %>
       </div>
       <div class="col-md-8">
         <div class="card-body">

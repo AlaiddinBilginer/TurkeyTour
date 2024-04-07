@@ -3,6 +3,7 @@
 
 <div class="row mb-5">
   <div class="col-8 offset-2">
+    <div id="map" style="width: 100%; height: 300px" class="mb-3"></div>
     <div class="card mb-5">
       <div class="card-body">
         <h1 class="card-title text-center"><%= place.title %></h1>
@@ -116,3 +117,10 @@
     <% } %>
   </div>
 </div>
+
+<script>
+  const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
+  const place = <%- JSON.stringify(place); %>;
+</script>
+
+<script src="/javascripts/showPageMap.js"></script>

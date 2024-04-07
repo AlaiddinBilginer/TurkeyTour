@@ -1,5 +1,8 @@
 const Place = require('../models/place');
 const { cloudinary } = require('../cloudinary');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geoCoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
   const places = await Place.find({});
@@ -11,9 +14,16 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createPlace = async (req, res, next) => {
+  const geoData = await geoCoder
+    .forwardGeocode({
+      query: req.body.place.location,
+      limit: 1,
+    })
+    .send();
   const place = new Place(req.body.place);
   place.images = req.files.map((f) => ({ url: f.path, filename: f.filename }));
   place.author = req.user._id;
+  place.geometry = geoData.body.features[0].geometry;
   await place.save();
   console.log(place);
   req.flash('success', 'Turistik yer başarı ile eklendi!');
