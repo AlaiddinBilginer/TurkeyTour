@@ -11,33 +11,44 @@ ImageSchema.virtual('thumbnail').get(function () {
   return this.url.replace('/upload', '/upload/w_200');
 });
 
-const placeSchema = new Schema({
-  title: String,
-  images: [ImageSchema],
-  description: String,
-  location: String,
-  price: Number,
-  geometry: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true,
+const opts = { toJSON: { virtuals: true } };
+
+const placeSchema = new Schema(
+  {
+    title: String,
+    images: [ImageSchema],
+    description: String,
+    location: String,
+    price: Number,
+    geometry: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
-    coordinates: {
-      type: [Number],
-      required: true,
-    },
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  reviews: [
-    {
+    author: {
       type: Schema.Types.ObjectId,
-      ref: 'Review',
+      ref: 'User',
     },
-  ],
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Review',
+      },
+    ],
+  },
+  opts
+);
+
+placeSchema.virtual('properties.popUpMarkup').get(function () {
+  return `
+  <strong><a href="/places/${this._id}">${this.title}</a></strong>
+  `;
 });
 
 placeSchema.post('findOneAndDelete', async function (doc) {

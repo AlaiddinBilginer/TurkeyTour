@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<div id="map" style="width: 100%; height: 400px"></div>
 <div class="mb-5">
   <h1 class="mb-3">Tüm Turistik Yerler</h1>
   <% for(let place of places) { %>
@@ -27,3 +28,10 @@
   </div>
   <% } %>
 </div>
+
+<script>
+  const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
+  const places = {features: <%- JSON.stringify(places); %>};
+</script>
+
+<script src="/javascripts/clustorMap.js"></script>
