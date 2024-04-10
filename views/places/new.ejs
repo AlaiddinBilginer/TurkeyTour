@@ -1,52 +1,38 @@
-<%- layout('layouts/boilerplate') %>
-<div class="row mb-5">
-  <div class="col-8 offset-2">
-    <h1 class="mb-3">Turistik Yer Ekle</h1>
-    <form
-      action="/places"
-      method="POST"
-      novalidate
-      class="validated-form"
-      enctype="multipart/form-data"
-    >
-      <div class="mb-3">
-        <label for="title" class="form-label">Başlık</label>
-        <input type="text" class="form-control" id="title" name="place[title]" required />
-      </div>
-      <div class="mb-3">
-        <label for="description" class="form-label">Tanım</label>
-        <textarea
-          type="text"
-          id="description"
-          name="place[description]"
-          class="form-control"
-          required
-        ></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="location" class="form-label">Konum</label>
-        <input type="text" class="form-control" id="location" name="place[location]" required />
-      </div>
-      <div class="mb-3">
-        <label for="price" class="form-label">Fiyat</label>
-        <div class="input-group">
-          <span class="input-group-text" id="price-addon">₺</span>
-          <input
-            type="text"
-            class="form-control"
-            id="price"
-            name="place[price]"
-            placeholder="0.00"
-            aria-describedby="price-addon"
-            required
-          />
+<% layout('layouts/boilerplate') %>
+
+<div class="row mb-5 px-3">
+    <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+        <div class="card p-5 mb-2 mt-5">
+            <div class="text-center mb-3 p-3">
+                <h2 class="mb-3">Turistik Yer Ekle</h2>
+                <p class="lead">Turistik yerlerinizi paylaşarak, diğer gezginlere yeni yerler keşfetmelerini sağlayın.</p>
+            </div>
+            <form action="/places" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Başlık</label>
+                    <input type="text" class="form-control" id="title" autofocus name="place[title]" required />
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Tanım</label>
+                    <textarea type="text" id="description" name="place[description]" class="form-control" rows="5" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Konum</label>
+                    <input type="text" class="form-control" id="location" name="place[location]" required />
+                </div>
+                <div class="mb-4">
+                    <label for="price" class="form-label">Fiyat</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-addon">₺</span>
+                        <input type="text" class="form-control" id="price" name="place[price]" placeholder="0.00" aria-describedby="price-addon" required />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Resim</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple />
+                </div>
+                <button class="btn btn-warning btn-lg btn-block mt-3">Ekle</button>
+            </form>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="image" class="form-label">Resim</label>
-        <input class="form-control" type="file" id="image" name="image" multiple />
-      </div>
-      <button class="btn btn-success">Ekle</button>
-    </form>
-  </div>
+    </div>
 </div>

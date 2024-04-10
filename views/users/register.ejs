@@ -1,39 +1,32 @@
-<%- layout('layouts/boilerplate') %>
-<div class="row">
-  <div class="col-8 offset-2">
-    <h1 class="mb-3">Kayıt Ol</h1>
-    <form action="/register" method="POST" class="validated-form" novalidate>
-      <div class="mb-3">
-        <label for="email" class="form-label">E-posta</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="username" class="form-label">Kullanıcı Adı</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          name="username"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Şifre</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          required
-        />
-      </div>
-      <button class="btn btn-primary">Kayıt Ol</button>
-    </form>
-  </div>
-</div>
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/styles/form.css" />
+<section class="wrapper d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
+            <form action="/register" method="POST" class="validated-form rounded bg-white shadow p-5" novalidate>
+                <div class="logo mb-3">
+                    <a href="/">
+                        <img src="https://res.cloudinary.com/dnhdprmgf/image/upload/v1712567840/turkeytour-Photoroom.png-Photoroom_s3dhiu.png" alt="Logo" />
+                    </a>
+                </div>
+                <div class="fw-normal text-muted mb-4">
+                    Zaten hesabınız var mı?
+                    <a href="/login" class="text-danger fw-bold text-decoration-none">Giriş Yap</a>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-posta" required />
+                    <label for="email" class="form-label">E-posta</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Kullanıcı Adı" required />
+                    <label for="username" class="form-label">Kullanıcı Adı</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Şifre" required />
+                    <label for="password" class="form-label">Şifre</label>
+                </div>
+                <button class="btn btn-danger w-100 my-3">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+</section>

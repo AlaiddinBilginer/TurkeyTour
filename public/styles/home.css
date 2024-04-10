@@ -1,0 +1,88 @@
+.home-section {
+    background: url('https://res.cloudinary.com/dnhdprmgf/image/upload/v1712689498/pexels-reanimated-man-x-14846616_l2cx6g.jpg') no-repeat center center/cover;
+    height: 93.5vh;
+}
+
+.home-section .carousel-item{
+    padding: 3rem 0;
+    height: 93.5vh;
+}
+
+.home-section .carousel-caption {
+    top: 30%;
+    bottom: 0;
+    left: 3%;
+    right: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.home-section .carousel-caption h1 {
+    font-size: 4rem;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.home-section .carousel-caption h3 {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    background-color: #03262c;
+    display: inline;
+}
+
+.home-section .carousel-caption p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    max-width: 40rem;
+    margin-bottom: 1.5rem;
+}
+
+.home-btn {
+    position: relative;
+    color: #fff;
+    background: linear-gradient(to right, #03262c, #04363e);
+    z-index: 1;
+    overflow: hidden;
+    border: 1px solid #fff;
+    border-radius: 3rem;
+    padding: 0.5rem 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.2rem;
+}
+
+.home-btn:hover {
+    background: #fff;
+    color: #03262c;
+    border: 1px solid #03262c;
+}
+
+.black {
+    color: #03262c;
+}
+
+@media (max-width: 768px) {
+    .container {
+        align-items: center;
+        text-align: center;
+    }
+    .home-section .carousel-caption h1 {
+        font-size: 3rem;
+    }
+    .home-section .carousel-caption h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 436px) {
+    .home-section .carousel-caption h3 {
+        font-size: 0.9rem;
+    }
+    .home-section .carousel-caption p {
+        font-size: 1rem;
+    }
+}

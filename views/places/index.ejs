@@ -1,37 +1,39 @@
 <% layout('layouts/boilerplate') %>
-<div id="map" style="width: 100%; height: 400px"></div>
-<div class="mb-5">
-  <h1 class="mb-3">Tüm Turistik Yerler</h1>
-  <% for(let place of places) { %>
-  <div class="card mb-3">
-    <div class="row">
-      <div class="col-md-4">
-        <% if(place.images.length) { %>
-        <img class="img-fluid" src="<%= place.images[0].url %>" alt="Place" />
-        <% } else { %>
-        <img
-          class="img-fluid"
-          src="https://res.cloudinary.com/dnhdprmgf/image/upload/v1712487822/Resim_Bulunamad%C4%B1_tku1ba.png"
-          alt="Resim Bulunamadı"
-        />
-        <% } %>
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h2><%= place.title %>, <%= place.location %></h2>
-          <p><%= place.description %></p>
-          <h3><%= place.price %> TL</h3>
-          <a class="btn btn-primary mt-3" href="/places/<%= place.id %>">Detayları Görüntüle</a>
+<link rel="stylesheet" href="/styles/indexPage.css" />
+
+<div id="map" class="mb-5"></div>
+<div class="mb-5 container">
+    <h1 class="mb-3">Turistik Yerler</h1>
+    <% for(let place of places) { %>
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <% if(place.images.length) { %>
+                <img class="img-fluid" src="<%= place.images[0].url %>" alt="Place" />
+                <% } else { %>
+                <img
+                    class="img-fluid"
+                    src="https://res.cloudinary.com/dnhdprmgf/image/upload/v1712487822/Resim_Bulunamad%C4%B1_tku1ba.png"
+                    alt="Resim Bulunamadı"
+                />
+                <% } %>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2><%= place.title %></h2>
+                    <p><%= place.description %></p>
+                    <h3><%= place.price %> TL</h3>
+                    <a class="btn btn-dark mt-3" href="/places/<%= place.id %>">Detayları Görüntüle</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <% } %>
+    <% } %>
 </div>
 
 <script>
-  const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
-  const places = {features: <%- JSON.stringify(places); %>};
+    const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
+    const places = {features: <%- JSON.stringify(places); %>};
 </script>
 
 <script src="/javascripts/clustorMap.js"></script>

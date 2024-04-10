@@ -1,0 +1,113 @@
+.main-btn {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #021832;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 0.08rem solid #021832;
+    padding: .4rem 1.5rem !important;
+    border-radius: 1rem;
+    line-height: 1.7rem;
+    display: inline-block;
+    transition: all 0.2s ease-out 0s;
+}
+
+.main-btn:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff !important;
+}
+
+.add-btn {
+    background-color: #135D66;
+    color: #fff !important;
+    transition: all .2s ease;
+    border: none;
+}
+
+.add-btn:hover {
+    background-color: rgba(28, 129, 143, 0.906)
+}
+
+.header_wrapper .navbar {
+    padding: .3rem 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 .5rem .375rem -0.375rem rgb(0 0 0 / 40%);
+    box-shadow: 0 .5rem .375rem -0.375rem rgb(0 0 0 / 40%);
+    -webkit-transition: background 0s ease-in-out 0s, margin-top 0s ease-in-out 0s, opacity 0s ease-in-out 0;
+    transition: background 0s ease-in-out 0s, margin-top 0s ease-in-out 0s, opacity 0s ease-in-out 0;
+}
+
+.navbar .navbar-toggler {
+    border: 0;
+    line-height: 2;
+}
+
+.navbar .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar .nav-item {
+    margin: 0 .6rem;
+}
+
+.navbar .nav-item .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color:#021832;
+    display: inline-block;
+}
+
+.navbar .nav-item .nav-link:hover {
+    color: #dc3545;
+}
+
+.navbar-brand img {
+    max-width: 130px;
+    transition: all 0.1s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+.navbar.scroll-on {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, .8);
+    animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
+}
+
+@keyframes fadeInDown {
+    0% {
+        top: -25%;
+    }
+
+    30% {
+        top: -10%;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+@media (max-width:992px) {
+    .navbar {
+        text-align: center;
+    }
+
+    .navbar .navbar-brand{
+        margin: auto;
+        margin-bottom: .5rem;
+        position: relative;
+        left: 1rem;
+    }
+
+    .navbar .nav-item {
+        margin-bottom: .5rem;
+    }
+}

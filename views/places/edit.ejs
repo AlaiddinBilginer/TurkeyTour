@@ -1,84 +1,54 @@
-<%- layout('layouts/boilerplate') %>
-<div class="row mb-5">
-  <div class="col-md-8 offset-2">
-    <h1 class="mb-3">Düzenle</h1>
-    <form
-      action="/places/<%= place._id %>?_method=PUT"
-      method="POST"
-      novalidate
-      class="validated-form"
-      enctype="multipart/form-data"
-    >
-      <div class="mb-3">
-        <label for="title" class="form-label">Başlık</label>
-        <input
-          type="text"
-          id="title"
-          name="place[title]"
-          value="<%= place.title %>"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="description" class="form-label">Tanım</label>
-        <textarea
-          type="text"
-          class="form-control"
-          id="description"
-          name="place[description]"
-          rows="5"
-          required
-        >
-<%= place.description %></textarea
-        >
-      </div>
-      <div class="mb-3">
-        <label for="location" class="form-label">Konum</label>
-        <input
-          type="text"
-          id="location"
-          name="place[location]"
-          value="<%= place.location %>"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label for="price" class="form-label">Fiyat</label>
-        <div class="input-group">
-          <span class="input-group-text" id="price-addon">₺</span>
-          <input
-            type="text"
-            class="form-control"
-            id="price"
-            name="place[price]"
-            value="<%= place.price %>"
-            placeholder="0.00"
-            aria-describedby="price-addon"
-            required
-          />
+<% layout('layouts/boilerplate') %>
+<div class="row mb-5 px-3">
+    <div class="col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-8 offset-xl-2">
+        <div class="card p-5 mb-2 mt-5">
+            <div class="text-center mb-3 p-3">
+                <h2 class="mb-3">Turistik Yer Düzenle</h2>
+            </div>
+            <form action="/places/<%= place._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Başlık</label>
+                    <input type="text" id="title" name="place[title]" value="<%= place.title %>" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Tanım</label>
+                    <textarea type="text" class="form-control" id="description" name="place[description]" rows="5" required><%= place.description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Konum</label>
+                    <input type="text" id="location" name="place[location]" value="<%= place.location %>" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Fiyat</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-addon">₺</span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="price"
+                            name="place[price]"
+                            value="<%= place.price %>"
+                            placeholder="0.00"
+                            aria-describedby="price-addon"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Resim Ekle</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple />
+                </div>
+                <div class="mt-5 mb-5">
+                    <p class="lead">Silmek İstediğiniz Resimleri Seçin</p>
+                    <% place.images.forEach(function(img, i) { %>
+                    <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="" />
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= img.filename %>" />
+                    </div>
+                    <% }) %>
+                </div>
+                <button class="btn btn-warning btn-lg btn-block">Düzenle</button>
+            </form>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="image" class="form-label">Resim Ekle</label>
-        <input class="form-control" type="file" id="image" name="image" multiple />
-      </div>
-      <div class="mb-3">
-        <% place.images.forEach(function(img, i) { %>
-        <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="" />
-        <div class="form-check-inline">
-          <input
-            type="checkbox"
-            id="image-<%= i %>"
-            name="deleteImages[]"
-            value="<%= img.filename %>"
-          />
-        </div>
-        <label for="image-<%= i %>">Sil</label>
-        <% }) %>
-      </div>
-      <button class="btn btn-primary">Düzenle</button>
-    </form>
-  </div>
+    </div>
 </div>

@@ -1,0 +1,19 @@
+.section-1 {
+    height: 400px;
+}
+
+.section-1 img {
+    height: 400px;
+}
+
+.line {
+    width: 98%;
+    margin-left: .7rem;
+    height: 1px;
+    background-color: #c21e1e;
+    margin-bottom: 1rem;
+}
+
+.red {
+    color: #c21e1e;
+}
