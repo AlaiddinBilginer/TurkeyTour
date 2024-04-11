@@ -19,7 +19,7 @@
             <% } %>
         </div>
         <div class="line"></div>
-        <div class="col-6 section-1 mb-4">
+        <div class="col-lg-6 col-12 section-1 mb-4">
             <div id="placeCarousel" class="carousel slide">
                 <div class="carousel-inner">
                     <% place.images.forEach((img, i) => { %>
@@ -40,7 +40,7 @@
                 <% } %>
             </div>
         </div>
-        <div class="col-6 section-1">
+        <div class="col-lg-6 col-12 section-1">
             <div id="map"></div>
         </div>
         <h4>Tanıtım</h4>
@@ -73,11 +73,12 @@
             </div>
         </div>
         <% } %> <% for(let review of place.reviews) { %>
-        <div class="card mb-3">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
             <div class="card-body">
-                <h5 class="card-title"><i class="fa-solid fa-user"></i> <%= review.author.username %></h5>
+                <h5 class="card-title"><i class="fa-solid fa-user fa-lg me-2"></i> <%= review.author.username %></h5>
+                <p><%= review.turkishDate %></p>
                 <p class="starability-result" data-rating="<%= review.rating %>">Rated: <%= review.rating %> stars</p>
-                <p class="card-text">Yorum: <%= review.body %></p>
+                <p class="card-text lead"><%= review.body %></p>
                 <% if(currentUser && review.author.equals(currentUser._id)) {%>
                 <form action="/places/<%= place._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Yorumu Sil</button>

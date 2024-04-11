@@ -17,3 +17,9 @@
 .red {
     color: #c21e1e;
 }
+
+@media (max-width: 992px) {
+    .section-1 {
+        margin-bottom: 1.5rem;
+    }
+}
